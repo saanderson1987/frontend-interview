@@ -1,33 +1,34 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const RepositorySearchResults = ({ searchResults }) => {
-  const onClickItemCard = () => {};
-  return (
-    <List>
-      {searchResults.map(
-        (
-          {
-            full_name,
-            description,
-            stargazers_count,
-            open_issues_count,
-            score,
-          },
-          idx
-        ) => (
-          <ItemCard key={idx} onClick={onClickItemCard}>
+const RepositorySearchResults = ({ searchResults }) => (
+  <List>
+    {searchResults.map(
+      (
+        {
+          id,
+          full_name,
+          description,
+          stargazers_count,
+          open_issues_count,
+          score,
+        },
+        idx
+      ) => (
+        <Link key={idx} to={`/repositories/${id}`} style={linkStyle}>
+          <ItemCard>
             <h2>{full_name}</h2>
             <div>Description: {description}</div>
             <div>Stargazers Count: {stargazers_count}</div>
             <div>Open Issues Count: {open_issues_count}</div>
             <div>Match Score: {score}</div>
           </ItemCard>
-        )
-      )}
-    </List>
-  );
-};
+        </Link>
+      )
+    )}
+  </List>
+);
 
 const List = styled.ul`
   list-style: none;
@@ -40,5 +41,10 @@ const ItemCard = styled.li`
   margin-top: 10px;
   padding: 0 10px 10px;
 `;
+
+const linkStyle = {
+  textDecoration: "none",
+  color: "black",
+};
 
 export default RepositorySearchResults;

@@ -17,15 +17,17 @@ import RepositorySearchResults from "./RespositorySearchResults";
 const WAIT_INTERVAL = 500;
 const SEARCH_REPOS_URL = "https://api.github.com/search/repositories";
 
-const formatSearchResultsData = (data) => {
-  return data.items.map(
+const formatSearchResultsData = (data) =>
+  data.items.map(
     ({
+      id,
       full_name,
       description,
       stargazers_count,
       open_issues_count,
       score,
     }) => ({
+      id,
       full_name,
       description,
       stargazers_count,
@@ -33,16 +35,14 @@ const formatSearchResultsData = (data) => {
       score,
     })
   );
-};
 
 const Repositories = () => {
   const [searchTerms, setSearchTerms] = useState("steve");
   const [searchResults, setSearchResults] = useState(null);
-  const [error, setError] = React.useState(null);
+  const [error, setError] = useState(null);
 
   const fetchRepos = useCallback(() => {
     if (searchTerms) {
-      console.log(searchTerms);
       const url = new URL(SEARCH_REPOS_URL);
       url.search = new URLSearchParams({ q: searchTerms });
       fetch(url)
