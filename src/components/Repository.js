@@ -4,25 +4,28 @@ import styled from "styled-components";
 
 const GET_REPO_BY_ID_URL = "https://api.github.com/repositories";
 
-const formatRepoData = ({
-  full_name,
-  description,
-  stargazers_count,
-  open_issues_count,
-  score,
-  issues_url,
-  pulls_url,
-  license,
-}) => ({
-  full_name,
-  description,
-  stargazers_count,
-  open_issues_count,
-  score,
-  issues_url,
-  pulls_url,
-  license,
-});
+const formatRepoData = (data) => {
+  const {
+    full_name,
+    description,
+    stargazers_count,
+    open_issues_count,
+    score,
+    issues_url,
+    pulls_url,
+    license,
+  } = data || {};
+  return {
+    full_name,
+    description,
+    stargazers_count,
+    open_issues_count,
+    score,
+    issues_url,
+    pulls_url,
+    license,
+  };
+};
 
 const Repository = () => {
   const { id } = useParams();

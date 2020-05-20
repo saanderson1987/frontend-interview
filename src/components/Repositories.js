@@ -18,23 +18,24 @@ const WAIT_INTERVAL = 500;
 const SEARCH_REPOS_URL = "https://api.github.com/search/repositories";
 
 const formatSearchResultsData = (data) =>
-  data.items.map(
-    ({
+  data?.items?.map((item) => {
+    const {
       id,
       full_name,
       description,
       stargazers_count,
       open_issues_count,
       score,
-    }) => ({
+    } = item || {};
+    return {
       id,
       full_name,
       description,
       stargazers_count,
       open_issues_count,
       score,
-    })
-  );
+    };
+  });
 
 const Repositories = () => {
   const [searchTerms, setSearchTerms] = useState("");
