@@ -4,7 +4,7 @@ import { useSetUserContext } from "../contexts/user";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = React.useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setError(null);

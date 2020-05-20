@@ -17,7 +17,8 @@ function App() {
 const AuthOrLogin = () => {
   const user = useUserContext();
 
-  return user.email ? <AuthenticatedApp /> : <Login />;
+  // return user.email ? <AuthenticatedApp /> : <Login />;
+  return <AuthenticatedApp />;
 };
 
 export default App;
