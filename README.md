@@ -48,7 +48,15 @@ Please, answer the following questions in this readme, underneath the question
 
 1. Name a newer feature of javascript that you believe is extra useful, and discuss how you have used it in this project, or how you would use it if needed.
 
+Option chaining is a feature in the latest version JavaScript that I beleive is very useful. With optional chaining, by appending `?` to the end of an object property name, the developer can access nested properties of an object without having to validate the existence of each property in the chain of property names. This allows for a much cleaner syntax in when accessing nested object properties than the former way. I used optional chaining in this project when formatting the response of the github api. Upon a cursory glance of the GitHub API documentation, I did not find an explicit guarantee of the response schema. I wanted to make sure that if the response returned `null` or `undefined` for a given property, the application would not throw an error. Instead of throwing an error if a property cannot be accessed, option chaining sets the variable to undefined, which the application then handles.
+
 2. What are 3 things you think `React` does very poorly? What tools do this better, if any?
+
+- Since the content of a React app are not generated until the app has loaded, the content cannot be accessed by search engines. As a result, developers have to come up with other options to ensure that the application content is picked up by search engines. One way of solving this problem is to use server-side-rendering. Fortunately, there are tools to acheive this, such a Next.js.
+
+- Previously, React did not have the ability to manage global application state without an external tool, such as Redux. The introduction of the Context API has changed this. However, unlike Redux, any component that consumes the values of the context provider is re-rendered if one of those values is changed. For this reason, developers need to be careful about using too many values in a single context.
+
+- React does not natively handle front end routes. Thankfully, there are tools such as React Router that adds this functionality to React apps.
 
 ## Submissions
 
