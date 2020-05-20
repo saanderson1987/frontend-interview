@@ -4,7 +4,7 @@ const SetUserContext = React.createContext(null);
 const UserContext = React.createContext(null);
 export const useUserContext = () => {
   const user = React.useContext(UserContext);
-  if (!user) throw new Error("Used outside of useer context");
+  if (!user) throw new Error("Used outside of user context");
   return user;
 };
 
@@ -16,7 +16,7 @@ export const useSetUserContext = () => {
 
 export const AuthController = ({ children }) => {
   const [user, setUser] = React.useState({
-    name: "Test user"
+    name: "Test user",
   });
 
   return (
