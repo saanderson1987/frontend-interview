@@ -36,7 +36,7 @@ const formatSearchResultsData = (data) => {
 };
 
 const Repositories = () => {
-  const [searchTerms, setSearchTerms] = useState("");
+  const [searchTerms, setSearchTerms] = useState("steve");
   const [searchResults, setSearchResults] = useState(null);
   const [error, setError] = React.useState(null);
 
