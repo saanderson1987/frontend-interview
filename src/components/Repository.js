@@ -26,7 +26,7 @@ const formatRepoData = ({
 
 const Repository = () => {
   const { id } = useParams();
-  const [repoData, setRepoData] = useState({});
+  const [repoData, setRepoData] = useState(null);
   const [error, setError] = useState(null);
 
   const fetchRepo = useCallback(() => {
@@ -34,7 +34,11 @@ const Repository = () => {
     fetch(url)
       .then((response) =>
         response.json().then((data) => {
-          setRepoData(formatRepoData(data));
+          if (data.message === "Not Found") {
+            setError("Repository Not Found");
+          } else {
+            setRepoData(formatRepoData(data));
+          }
         })
       )
       .catch((e) => setError(e.toString()));
@@ -53,33 +57,35 @@ const Repository = () => {
     issues_url,
     pulls_url,
     license,
-  } = repoData;
+  } = repoData || {};
 
   return (
     <>
-      <div>
-        <h2>{full_name}</h2>
-        <div>Description: {description}</div>
-        <div>Stargazers Count: {stargazers_count}</div>
-        <div>Open Issues Count: {open_issues_count}</div>
-        <div>Match Score: {score}</div>
+      {repoData && (
         <div>
-          <a href={issues_url}>Issues</a>
+          <h2>{full_name}</h2>
+          <div>Description: {description}</div>
+          <div>Stargazers Count: {stargazers_count}</div>
+          <div>Open Issues Count: {open_issues_count}</div>
+          <div>Match Score: {score}</div>
+          <div>
+            <a href={issues_url}>Issues</a>
+          </div>
+          <div>
+            <a href={pulls_url}>Pull Requests</a>
+          </div>
+          <div>License: {!license && "none"}</div>
+          {license && (
+            <LicenseInfo>
+              <div>Name: {license.name}</div>
+              <div>SPDX ID: {license.spdx_id}</div>
+              <div>
+                URL: <a href={license.url}>{license.url}</a>
+              </div>
+            </LicenseInfo>
+          )}
         </div>
-        <div>
-          <a href={pulls_url}>Pull Requests</a>
-        </div>
-        <div>License: {!license && "none"}</div>
-        {license && (
-          <LicenseInfo>
-            <div>Name: {license.name}</div>
-            <div>SPDX ID: {license.spdx_id}</div>
-            <div>
-              URL: <a href={license.url}>{license.url}</a>
-            </div>
-          </LicenseInfo>
-        )}
-      </div>
+      )}
       {error && <p>Error: {error}</p>}
     </>
   );
