@@ -5,6 +5,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import Repositories from "./Repositories";
 import Repository from "./Repository";
+
 const AuthenticatedApplication = () => {
   return (
     <div>
